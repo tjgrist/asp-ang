@@ -18,6 +18,6 @@ export class FetchDataComponent {
 interface WeatherForecast {
     dateFormatted: string;
     temperatureC: number;
-    temperatureF: number;
+    temperatureF: number;   
     summary: string;
 }

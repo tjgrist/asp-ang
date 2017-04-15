@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using TutorialHub.Data;
+using TutorialHub.Models;
 
 namespace WebApplicationBasic
 {
@@ -29,6 +34,13 @@ namespace WebApplicationBasic
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
         }
 
