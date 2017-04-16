@@ -42,10 +42,11 @@ namespace WebApplicationBasic
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext dbContext)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -74,6 +75,9 @@ namespace WebApplicationBasic
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            //seed db
+            ApplicationDbContext.Seed(app);
         }
     }
 }

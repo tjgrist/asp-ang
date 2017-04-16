@@ -1,18 +1,26 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TutorialHub.Models;
+using TutorialHub.Data;
 
 namespace WebApplicationBasic.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("api/[controller]")]
     public class PostsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        
+        public PostsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet("[action]")]
-        public IEnumerable<string> Get()
-        {
-            var strings = new string[]{ "hello", "world"};
-            return strings;
+        public IEnumerable<Post> Get()
+        {   
+            return _context.Posts.ToList();  
         }
   
     }
