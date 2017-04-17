@@ -4,23 +4,25 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TutorialHub.Models;
 using TutorialHub.Data;
+using TutorialHub.Interfaces;
+using TutorialHub.Repository;
 
 namespace WebApplicationBasic.Controllers
 {
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPostsRepository _postsRepository;
         
-        public PostsController(ApplicationDbContext context)
+        public PostsController(IPostsRepository repo)
         {
-            _context = context;
+            _postsRepository = repo;
         }
 
         [HttpGet("[action]")]
         public IEnumerable<Post> Get()
         {   
-            return _context.Posts.ToList();  
+            return _postsRepository.GetAll();  
         }
   
     }
