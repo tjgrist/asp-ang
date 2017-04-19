@@ -15,6 +15,7 @@ using TutorialHub.Data;
 using TutorialHub.Models;
 using TutorialHub.Repository;
 using TutorialHub.Interfaces;
+using TutorialHub.Services;
 
 namespace WebApplicationBasic
 {
@@ -47,6 +48,32 @@ namespace WebApplicationBasic
 
             services.AddMvc();
 
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            //optional Identity config
+            // services.Configure<IdentityOptions>(options =>
+            // {
+            //     // Password settings
+            //     options.Password.RequireDigit = true;
+            //     options.Password.RequiredLength = 8;
+            //     options.Password.RequireNonAlphanumeric = false;
+            //     options.Password.RequireUppercase = true;
+            //     options.Password.RequireLowercase = false;
+                
+            //     // Lockout settings
+            //     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+            //     options.Lockout.MaxFailedAccessAttempts = 10;
+                
+            //     // Cookie settings
+            //     options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+            //     options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+            //     options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOff";
+                
+            //     // User settings
+            //     options.User.RequireUniqueEmail = true;
+            // });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,14 +93,20 @@ namespace WebApplicationBasic
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
             app.UseStaticFiles();
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                
+                routes.MapRoute(
+                    name: "account",
+                    template: "{controller=Account}/{action=Index}/{id?}");
+                
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

@@ -15,21 +15,21 @@ namespace TutorialHub.Repository {
             _context = context;
         }
     
-    public void Add(Post post) {
-        //todo
-    }
+        public void Add(Post post) {
+            //todo
+        }
 
-    public void Remove(long id) {
-        //todo
-    }
+        public void Remove(long id) {
+            //todo
+        }
 
-    public void Edit(Post post) {
-        //todo
-    }
+        public void Edit(Post post) {
+            //todo
+        }
 
-    public IEnumerable<Post> GetAll() {
+        public IEnumerable<Post> GetAll() {
 
-        return _context.Posts.ToList();
-    }
+            return _context.Posts.ToList();
+        }
     }
 }
