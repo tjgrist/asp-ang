@@ -24,6 +24,9 @@
     </DotNetCliToolReference>
   </ItemGroup>
   <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
