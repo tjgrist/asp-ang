@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using TutorialHub.Data;
 using TutorialHub.Models;
-using TutorialHub.Repository;
-using TutorialHub.Interfaces;
 using TutorialHub.Services;
 
 namespace WebApplicationBasic
@@ -44,7 +42,8 @@ namespace WebApplicationBasic
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IPostsRepository, PostsRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddMvc();
 

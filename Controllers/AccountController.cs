@@ -13,7 +13,7 @@ using TutorialHub.Models;
 using TutorialHub.Models.AccountViewModels;
 using TutorialHub.Services;
 
-namespace WebApplicationBasic.Controllers
+namespace TutorialHub.Controllers
 {
     
     public class AccountController : Controller

@@ -4,25 +4,39 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TutorialHub.Models;
 using TutorialHub.Data;
-using TutorialHub.Interfaces;
-using TutorialHub.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
-namespace WebApplicationBasic.Controllers
+namespace TutorialHub.Controllers
 {
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
-        private readonly IPostsRepository _postsRepository;
+        private IRepository<Post> _postsRepo;
+        private UserManager<ApplicationUser> _userManager;
+        private string currentUserId;
+        private string GetUserId() => _userManager.GetUserId(User);
+
         
-        public PostsController(IPostsRepository repo)
+        public PostsController(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager)
         {
-            _postsRepository = repo;
+            _postsRepo = postsRepo;
+            _userManager = userManager;
         }
 
         [HttpGet("[action]")]
         public IEnumerable<Post> Get()
         {   
-            return _postsRepository.GetAll();  
+            return _postsRepo.GetAll();  
+        }
+
+
+        [Authorize]
+        [HttpGet("[action]")]
+        public IEnumerable<Post> GetUserPosts()
+        {
+            currentUserId = GetUserId();
+            return _postsRepo.GetAll().Where(p => p.AuthorId == currentUserId);
         }
   
     }

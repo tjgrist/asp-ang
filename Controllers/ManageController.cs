@@ -11,7 +11,7 @@ using TutorialHub.Models;
 using TutorialHub.Models.ManageViewModels;
 using TutorialHub.Services;
 
-namespace fwap.Controllers
+namespace TutorialHub.Controllers
 {
     [Authorize]
     public class ManageController : Controller
