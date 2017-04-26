@@ -6,17 +6,32 @@
     "configurations": [
 
         {
-            "type": "node",
+            "type":"coreclr",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${file}"
+            "name": "run",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AspAng.dll",
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "args": [],
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         },
         {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to Port",
-            "address": "localhost",
-            "port": 5858
+            "type":"coreclr",
+            "request": "launch",
+            "name": "watch",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AspAng.dll",
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "args": ["watch"],
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
     ]
 }

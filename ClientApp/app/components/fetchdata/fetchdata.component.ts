@@ -7,11 +7,26 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public posts: Post[];
+    public message: any;
+    public btnText: string;
 
-    constructor(http: Http) {
+    constructor(private http: Http) {
         http.get('/api/posts/get').subscribe(result => {
             this.posts = result.json() as Post[];
         });
+        this.btnText = '+';
+    }
+
+    public sendPost(data){
+        this.btnText = '......';
+        this.http.post('api/posts/post', data).subscribe(result => {
+            this.posts.push(result.json() as Post);
+            this.handleSucess();
+        });
+    }
+    private handleSucess() {
+        this.message = 'Posted!';
+        this.btnText = '+'
     }
 }
 

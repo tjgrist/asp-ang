@@ -1,4 +1,4 @@
-using System;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +14,9 @@ namespace TutorialHub.Controllers
     {
         private IRepository<Post> _postsRepo;
         private UserManager<ApplicationUser> _userManager;
-        private string currentUserId;
         private string GetUserId() => _userManager.GetUserId(User);
+
+        private string currentUserId;
 
         
         public PostsController(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager)
@@ -28,6 +29,30 @@ namespace TutorialHub.Controllers
         public IEnumerable<Post> Get()
         {   
             return _postsRepo.GetAll();  
+        }
+
+
+        [HttpGet("{id}", Name = "GetPost")]
+        public IActionResult GetById(long id) 
+        {
+            var item = _postsRepo.Get(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(item);
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult Post([FromBody] Post post)
+        {
+            if (!ModelState.IsValid){
+                return BadRequest();
+            }
+            post.AuthorId = GetUserId();
+            _postsRepo.Add(post);
+            return CreatedAtRoute("GetPost", new { id = post.Id }, post);
+            
         }
 
 
