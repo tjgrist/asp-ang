@@ -15,14 +15,16 @@ namespace TutorialHub.Controllers
         private IRepository<Post> _postsRepo;
         private UserManager<ApplicationUser> _userManager;
         private string GetUserId() => _userManager.GetUserId(User);
+        private ApplicationDbContext _context;
 
         private string currentUserId;
 
         
-        public PostsController(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager)
+        public PostsController(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _postsRepo = postsRepo;
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet("[action]")]
@@ -49,7 +51,7 @@ namespace TutorialHub.Controllers
             if (!ModelState.IsValid){
                 return BadRequest();
             }
-            post.AuthorId = GetUserId();
+            post.Author = _context.Users.FirstOrDefault(u => u.Id == GetUserId());
             _postsRepo.Add(post);
             return CreatedAtRoute("GetPost", new { id = post.Id }, post);
             
@@ -61,7 +63,7 @@ namespace TutorialHub.Controllers
         public IEnumerable<Post> GetUserPosts()
         {
             currentUserId = GetUserId();
-            return _postsRepo.GetAll().Where(p => p.AuthorId == currentUserId);
+            return _postsRepo.GetAll().Where(p => p.Author.Id == currentUserId);
         }
   
     }

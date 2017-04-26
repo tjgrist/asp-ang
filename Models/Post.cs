@@ -10,7 +10,7 @@ namespace TutorialHub.Models {
         public int Views {get; set;}
         public DateTime Created { get; set; }
         
-        public string AuthorId { get; set; }
+        // public string AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
     }
 }

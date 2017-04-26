@@ -36,7 +36,7 @@ namespace WebApplicationBasic
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("WindowsConnection")));
             
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

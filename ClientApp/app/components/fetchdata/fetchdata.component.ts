@@ -17,7 +17,12 @@ export class FetchDataComponent {
         this.btnText = '+';
     }
 
-    public sendPost(data){
+    public sendPost(){
+        var data = {
+            created: new Date(),
+            body: "some text here",
+            views: 34
+        }
         this.btnText = '......';
         this.http.post('api/posts/post', data).subscribe(result => {
             this.posts.push(result.json() as Post);
