@@ -9,8 +9,6 @@ namespace TutorialHub.Models {
         public string Body { get; set; }
         public int Views {get; set;}
         public DateTime Created { get; set; }
-        
-        // public string AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
     }
 }
