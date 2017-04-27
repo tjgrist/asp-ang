@@ -42,7 +42,6 @@ namespace WebApplicationBasic
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddMvc();

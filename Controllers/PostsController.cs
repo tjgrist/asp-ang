@@ -12,30 +12,27 @@ namespace TutorialHub.Controllers
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
-        private IRepository<Post> _postsRepo;
+        private IRepository<Post> _postsRepository;
         private UserManager<ApplicationUser> _userManager;
-        private string GetUserId() => _userManager.GetUserId(User);
-
-        private string currentUserId;
-
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         
-        public PostsController(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager)
+        public PostsController(IRepository<Post> postsRepository, UserManager<ApplicationUser> userManager)
         {
-            _postsRepo = postsRepo;
+            _postsRepository = postsRepository;
             _userManager = userManager;
         }
 
         [HttpGet("[action]")]
         public IEnumerable<Post> Get()
         {   
-            return _postsRepo.GetAll();  
+            return _postsRepository.GetAll();  
         }
 
 
         [HttpGet("{id}", Name = "GetPost")]
         public IActionResult GetById(long id) 
         {
-            var item = _postsRepo.Get(id);
+            var item = _postsRepository.Get(id);
             if (item == null)
             {
                 return NotFound();
@@ -44,13 +41,13 @@ namespace TutorialHub.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Post([FromBody] Post post)
+        public async Task<IActionResult> Post([FromBody] Post post)
         {
             if (!ModelState.IsValid){
                 return BadRequest();
             }
-            post.AuthorId = GetUserId();
-            _postsRepo.Add(post);
+            post.Author = await GetCurrentUserAsync();
+            _postsRepository.Add(post);
             return CreatedAtRoute("GetPost", new { id = post.Id }, post);
             
         }
@@ -58,10 +55,10 @@ namespace TutorialHub.Controllers
 
         [Authorize]
         [HttpGet("[action]")]
-        public IEnumerable<Post> GetUserPosts()
+        public async Task<IEnumerable<Post>> GetUserPosts()
         {
-            currentUserId = GetUserId();
-            return _postsRepo.GetAll().Where(p => p.AuthorId == currentUserId);
+            ApplicationUser user = await GetCurrentUserAsync();
+            return _postsRepository.GetAll().Where(p => p.Author ==  user);
         }
   
     }

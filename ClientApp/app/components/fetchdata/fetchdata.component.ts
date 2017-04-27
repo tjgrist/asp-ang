@@ -17,14 +17,19 @@ export class FetchDataComponent {
         this.btnText = '+';
     }
 
-    public sendPost(data){
+    public sendPost(){
+        var data = {
+            created: new Date(),
+            views: 5,
+            body: 'lorem supra ipsum'
+        };
         this.btnText = '......';
         this.http.post('api/posts/post', data).subscribe(result => {
             this.posts.push(result.json() as Post);
-            this.handleSucess();
+            this.handleSuccess();
         });
     }
-    private handleSucess() {
+    private handleSuccess() {
         this.message = 'Posted!';
         this.btnText = '+'
     }
