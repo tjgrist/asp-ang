@@ -7,6 +7,8 @@ import { Http } from "@angular/http";
  */
 @Injectable()
 export class PostsService {
+  private allPostsRoute = 'api/posts/get';
+  private postRoute = 'api/posts/post';
 
   constructor(private http: Http) {
     
@@ -14,13 +16,13 @@ export class PostsService {
 
   getPosts() {
     return this.http
-      .get('api/posts/get')
+      .get(this.allPostsRoute)
       .map((response) => response.json());
   }
 
   createPost(data) {
     return this.http
-      .post('api/posts/post', data)
+      .post(this.postRoute, data)
       .map((response) => response.json());
   }
 
