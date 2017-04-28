@@ -19,9 +19,7 @@ import { PostsService } from './services/posts/posts.service';
         PostsComponent,
         HomeComponent
     ],
-    providers: [
-        PostsService
-    ],
+    providers: [PostsService],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([

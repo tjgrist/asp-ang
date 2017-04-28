@@ -1,36 +1,32 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { PostsService } from '../../services/posts/posts.service';
 
 @Component({
     selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+    templateUrl: './fetchdata.component.html',
+    providers: [PostsService]
 })
 export class FetchDataComponent {
     public posts: Post[];
     public message: any;
     public btnText: string;
 
-    constructor(private http: Http) {
-        http.get('/api/posts/get').subscribe(result => {
-            this.posts = result.json() as Post[];
-        });
+    constructor(private _postsService: PostsService) {
         this.btnText = '+';
     }
 
-    public sendPost(){
-        var data = {
-            created: new Date(),
-            views: 5,
-            body: 'lorem supra ipsum'
-        };
+    getPosts(){
         this.btnText = '......';
-        this.http.post('api/posts/post', data).subscribe(result => {
-            this.posts.push(result.json() as Post);
-            this.handleSuccess();
+        this._postsService.getPosts()
+            .subscribe(data => { this.posts = data as Post[];
+                console.log(data);
+            this.handleSucess();
         });
     }
-    private handleSuccess() {
-        this.message = 'Posted!';
+
+    private handleSucess() {
+        this.message = 'Got em!';
         this.btnText = '+'
     }
 }
@@ -38,5 +34,5 @@ export class FetchDataComponent {
 interface Post {
     body: string;
     views: number;
-    created: Date;   
+    created: Date; 
 }

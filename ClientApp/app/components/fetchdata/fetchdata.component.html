@@ -7,10 +7,10 @@
 <table class='table' *ngIf="posts">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Body</th>
+            <th>date</th>
+            <th>views</th>
+            <th>author</th>
         </tr>
     </thead>
     <tbody>
@@ -18,9 +18,10 @@
             <td>{{ post.body }}</td>
             <td>{{ post.created }}</td>
             <td>{{ post.views }}</td>
+            <td>{{ post.authorid }}</td>
         </tr>
     </tbody>
 </table>
 
-<button (click)="sendPost()">{{btnText}}</button>
+<button (click)="getPosts()">{{btnText}}</button>
 <p *ngIf="message">{{message}}</p>
