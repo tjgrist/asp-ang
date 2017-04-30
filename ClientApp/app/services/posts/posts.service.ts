@@ -1,10 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 
-/**
- * @description
- * @class
- */
 @Injectable()
 export class PostsService {
   private allPostsRoute = 'api/posts/get';

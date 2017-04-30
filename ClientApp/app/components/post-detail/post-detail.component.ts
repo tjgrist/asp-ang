@@ -7,7 +7,8 @@ import { Post } from '../../models/post';
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.css']
+  styleUrls: ['./post-detail.component.css'],
+  providers: [PostsService]
 })
 
 export class PostDetailComponent implements OnInit {
@@ -26,10 +27,7 @@ export class PostDetailComponent implements OnInit {
   ngOnInit() {
       this.route.params
     .switchMap((params: Params) => this._postsService.getPost(+params['id']))
-    .subscribe(post => {
-      this.post = post
-      console.log(post);
-    });
+    .subscribe(post => this.post = post);
   }
 
 }

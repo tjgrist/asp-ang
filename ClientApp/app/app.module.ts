@@ -5,10 +5,11 @@ import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { PostsComponent } from './components/posts/posts.component';
 import { PostsService } from './services/posts/posts.service';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
+
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -16,7 +17,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
         AppComponent,
         NavMenuComponent,
         CounterComponent,
-        PostsComponent,
+        NewPostComponent,   
         PostListComponent,
         PostDetailComponent,
         HomeComponent
@@ -29,7 +30,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
             { path: 'home', component: HomeComponent },
             { path: 'feed', component: PostListComponent },
             { path: 'feed/:id', component: PostDetailComponent },
-            { path: 'new', component: PostsComponent },
+            { path: 'new', component: NewPostComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
