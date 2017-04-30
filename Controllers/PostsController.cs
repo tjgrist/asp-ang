@@ -29,8 +29,8 @@ namespace TutorialHub.Controllers
         }
 
 
-        [HttpGet("{id}", Name = "GetPost")]
-        public IActionResult GetById(long id) 
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetPost(int id) 
         {
             var item = _postsRepository.Get(id);
             if (item == null)

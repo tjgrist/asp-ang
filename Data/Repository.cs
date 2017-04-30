@@ -22,7 +22,7 @@ namespace TutorialHub.Data
             return _entities.AsEnumerable();
         }
  
-        public T Get(long id)
+        public T Get(int id)
         {
             return _entities.Find(id);
         }

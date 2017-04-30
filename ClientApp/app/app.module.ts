@@ -4,10 +4,11 @@ import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostsService } from './services/posts/posts.service';
+import { PostListComponent } from './components/post-list/post-list.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -15,8 +16,9 @@ import { PostsService } from './services/posts/posts.service';
         AppComponent,
         NavMenuComponent,
         CounterComponent,
-        FetchDataComponent,
         PostsComponent,
+        PostListComponent,
+        PostDetailComponent,
         HomeComponent
     ],
     providers: [PostsService],
@@ -25,8 +27,8 @@ import { PostsService } from './services/posts/posts.service';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'feed', component: PostListComponent },
+            { path: 'feed/:id', component: PostDetailComponent },
             { path: 'new', component: PostsComponent },
             { path: '**', redirectTo: 'home' }
         ])

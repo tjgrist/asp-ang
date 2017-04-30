@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 // This Module's Components
 import { PostsComponent } from './posts.component';
+import { PostListComponent } from '../post-list/post-list.component';
+import { PostDetailComponent } from '../post-detail/post-detail.component';
 
 @NgModule({
     imports: [
@@ -10,7 +12,9 @@ import { PostsComponent } from './posts.component';
     ],
     declarations: [
         PostsComponent,
-    ],
+    PostListComponent,
+    PostDetailComponent
+],
     exports: [
         PostsComponent,
     ]

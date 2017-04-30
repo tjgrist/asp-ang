@@ -107,7 +107,7 @@ namespace WebApplicationBasic
             });
 
             //seed db
-            //ApplicationDbContext.Seed(app);
+            ApplicationDbContext.Seed(app);
         }
     }
 }

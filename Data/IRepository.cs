@@ -6,7 +6,7 @@ namespace TutorialHub.Data
     public interface IRepository<T> where T : class 
     {
         IEnumerable<T> GetAll();
-        T Get(long id);
+        T Get(int id);
         void Add(T entity);       
         void Update(T entity);
         int Delete(T entity);

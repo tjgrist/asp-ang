@@ -20,9 +20,7 @@ export class PostsComponent implements OnInit{
     }
 
     publishPost() {
-        var data = {
-
-        }
+        var data = {}
         this.postsService.createPost(data);
     }
 

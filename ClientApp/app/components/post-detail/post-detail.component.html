@@ -1,0 +1,9 @@
+    <div *ngIf="post">
+      <h2>{{post.body}} </h2>
+      <div><label>id: </label>{{post.id}}</div>
+      <div>
+        <label>date: </label>
+        <span>{{post.created}}</span>
+      </div>
+    </div>
+    <button (click)="goBack()" class="glyphicon glyphicon-arrow-left"></button> 
