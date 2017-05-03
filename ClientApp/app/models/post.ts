@@ -1,7 +1,10 @@
 export class Post {
-    id: number;
-    body: string;
-    views: number;
-    created: Date; 
+    public id: number
+    
+    constructor (
+        public body: string,
+        public views: number,
+        public created: Date
+        ) {}
 
 }
