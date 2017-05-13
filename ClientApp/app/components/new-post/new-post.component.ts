@@ -12,6 +12,7 @@ import { Post } from '../../models/post'
 export class NewPostComponent implements OnInit{
     public model;
     public response;
+    public errorMsg;
 
     constructor(private postsService: PostsService) {}
 
@@ -19,10 +20,10 @@ export class NewPostComponent implements OnInit{
 
     }
 
-    publishPost() {
+    publishPost(bodyVal) {
         let post = new Post(
-            this.model.body,
-            5,
+            bodyVal,
+            3,
             new Date()
         )
         
