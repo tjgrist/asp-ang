@@ -17,10 +17,12 @@ export class NewPostComponent implements OnInit{
     constructor(private postsService: PostsService) {}
 
     ngOnInit() {
-
     }
 
     publishPost(bodyVal) {
+        if (!bodyVal || bodyVal == '') {
+            return null;
+        }
         let post = new Post(
             bodyVal,
             3,
